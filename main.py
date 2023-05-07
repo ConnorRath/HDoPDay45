@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
-import pprint
 import numpy
-import lxml
 import requests
 
 # with open("website.html", encoding="utf-8") as file:
@@ -39,16 +37,10 @@ response = requests.get(url)
 
 data = response.text
 soup = BeautifulSoup(data, "html.parser")
-# print(soup.find_all)
 
-score_list = soup.find_all(class_="score")
-#print(score_list)
+
 
 article_tag = soup.find(name='span', class_='titleline')
-# print(article_tag.a)
-#article_text = soup.select_one(".titleline a")
-# article_upvote = soup.select_one(".subline .score")
-
 
 article_texts = []
 article_links = []
@@ -71,11 +63,10 @@ article_scores_num = [int(score.getText().split(' ')[0]) for score in all_articl
 
 print(article_texts)
 print(article_links)
-# article_scores_num = sorted(article_scores_num, reverse=True)
 print(article_scores_num)
 
-######## Personal project, find a way to sort the list of upvotes, find the indices of that list, and sort the
-######## articles in that same order. DONE!!
+#------------!!!! Personal project, find a way to sort the list of upvotes, find the indices of that list, and sort the
+#------------!!!! articles in that same order. DONE!!
 
 largest_number = max(article_scores_num)
 largest_index = article_scores_num.index(largest_number)
@@ -89,3 +80,5 @@ print(sorted_index)
 
 for index in sorted_index:
     print(f"{article_texts[index]}, {article_links[index]}, {article_scores_num[index]}\n")
+
+
